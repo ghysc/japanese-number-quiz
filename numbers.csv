@@ -1,14 +1,14 @@
-0,      zero,           ゼロ,   No kanji
-1,      one,            いち,   一
-2,      two,            に,     二
-3,      three,          さん,   三
-4,      four,           よん,   四
-5,      five,           ご,     五
-6,      six,            ろく,   六
-7,      seven,          なな,   七
-8,      eight,          はち,   八
-9,      nine,           きゅう, 九
-10,     ten,            じゅう, 十
-100,    hundred,        ひゃく, 百
-1000,   thousand,       せん,   千
-10000,  ten thousand,   まん,   万
+0,zero,ゼロ,No kanji
+1,one,いち,一
+2,two,に,二
+3,three,さん,三
+4,four,よん,四
+5,five,ご,五
+6,six,ろく,六
+7,seven,なな,七
+8,eight,はち,八
+9,nine,きゅう,九
+10,ten,じゅう,十
+100,hundred,ひゃく,百
+1000,thousand,せん,千
+10000,ten thousand,まん,万
