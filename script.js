@@ -1,12 +1,8 @@
 
-const min = 0;
-const max = 100000;
-let numbers = [];
-
 document.addEventListener('DOMContentLoaded', function() {
     clearInput();
-    buildNumberQuizData();
-    displayNumber();
+    fetchCSVData();
+    updateOptions();
 });
 
 function clearInput() {
@@ -16,7 +12,9 @@ function clearInput() {
     }
 }
 
-function buildNumberQuizData() {
+let numbers = [];
+
+function fetchCSVData() {
     // Use the fetch API to get the content of the file
     fetch('./numbers.csv')
         .then(response => response.text())
@@ -32,14 +30,27 @@ function buildNumberQuizData() {
         .catch(error => console.error('Error fetching file:', error));
 }
 
-function displayNumber() {
+let numeric;
+let hiragana;
+let kanji;
+let min;
+let max;
+
+function updateOptions() {
+    numeric = document.getElementById('numeric').checked;
+    hiragana = document.getElementById('hiragana').checked;
+    kanji = document.getElementById('kanji').checked;
+    min = parseInt(document.getElementById('min').value);
+    max = parseInt(document.getElementById('max').value);
+    refreshNumber();
+}
+
+function refreshNumber() {
     let number = document.getElementById('number');
     
     if (number) {
         let random = Math.floor(Math.random() * (max - min + 1)) + min;
         number.innerText = random;
-
-        
     }
 }
 

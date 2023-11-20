@@ -14,12 +14,23 @@
 </head>
 
 <body>
-    <header>
-        <input type="checkbox">
+    <header oninput="updateOptions()">
+        <div id="questionTypes">
+            <input id="numeric" type="checkbox">0123
+            <input id="hiragana" type="checkbox" checked>ひらがな
+            <input id="kanji" type="checkbox" checked>漢字
+        </div>
+        <div id="answerTypes">
+            <input type="checkbox">Ne fait rien
+        </div>
+        <div id="range">
+            <input id="min" type="number" value="0">
+            <input id="max" type="number" value="100000">
+        </div>
     </header>
 
     <div id="main">
-        <div id="number">1000</div>
+        <div id="number"></div>
         <input id="answer" type="text" oninput="checkAnswer(this)" autofocus/>
     </div>
 
