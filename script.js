@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateOptions();
     (async() => {
         await fetchCSVData();
-        refreshQuestion(true);
+        refreshQuestion(true, false);
     })();
 });
 
@@ -64,20 +64,24 @@ function updateOptions() {
     // ------- MISC -------
     min = parseInt(document.getElementById('min').value);
     max = parseInt(document.getElementById('max').value);
-    spaced = document.getElementById('spaced').checked ? "\t\t" : "";
+    spaced = document.getElementById('spaced').checked ? "\t" : "";
 }
 
 let randomNumber;
+let questionID = 0;
 
-function refreshQuestion(refreshNumber) {
+function refreshQuestion(refreshNumber, refreshType) {
     // number to guess
     if (refreshNumber) {
         randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
         console.log("New number to guess ", randomNumber);
     }
 
+    if (refreshType) {
+        questionID = Math.floor(Math.random() * questions.length);
+    }
+
     //which type of quetion
-    let questionID = Math.floor(Math.random() * questions.length);
     switch(questions[questionID].id) {
         case "numeric":
             numberElement.innerText = randomNumber;
@@ -162,24 +166,23 @@ function buildNumber(number, writingType) {
 }
 
 function validateAnswer(event) {
-    // Check if the key pressed is the "Enter" key
+    // Perform actions when "Enter" key is pressed
     if (event.keyCode === 13) {
-        // Perform actions when "Enter" key is pressed
-        console.log(answerElement.value);
-        if (answer != randomNumber) {
+        if (answerElement.value != randomNumber) {
             answerElement.className = "wrong";
-            setTimeout(() => {answerElement.className = "" }, 1000);
+            setTimeout(() => { answerElement.className = "" }, 1000);
+            
+            clearInput();
         }
     }
 }
 
 function checkAnswer() {
-    let answer = answerElement.value;
-    if (answer == randomNumber) {
+    if (answerElement.value == randomNumber) {
         answerElement.className = "valid";
-        setTimeout(() => {answerElement.className = "" }, 1000);
+        setTimeout(() => { answerElement.className = "" }, 1000);
 
         clearInput();
-        refreshQuestion(true);
+        refreshQuestion(true, true);
     }
 }

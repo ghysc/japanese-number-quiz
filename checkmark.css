@@ -1,0 +1,38 @@
+.checkmarkContainer {
+    user-select: none;
+}
+
+.checkmark {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: inline-block;
+
+    background-color: #adadad;
+    border: 3px solid #525252;
+}
+
+.checkmarkContainer input[type="checkbox"]:checked ~ .checkmark {
+    background-color: #525252;
+    border: 3px solid #adadad;
+}
+
+.checkmark div {
+    position: relative;
+    top: 28px;
+    user-select: none;
+
+    color: #000;
+}
+
+.checkmarkContainer input[type="checkbox"]:checked ~ .checkmark div {
+    color: #dfdfdf;
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -100vw;
+    
+    /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead.
+    It can be better for accessibilty on some touch devices for discoverability. */
+}

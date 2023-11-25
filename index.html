@@ -9,33 +9,74 @@
     <link rel="icon"href="flag.svg" type="image/svg" >
 
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkmark.css">
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 
 <body>
-    <header oninput="updateOptions(); refreshQuestion(false);">
+    <header oninput="updateOptions(); refreshQuestion(false, false);">
         <div id="questions">
-            <input id="numeric" type="checkbox">0123
-            <input id="hiragana" type="checkbox" checked>ひらがな
-            <input id="kanji" type="checkbox" checked>漢字
-            <input id="voice_eng" type="checkbox">Voice ENG
-            <input id="voice_jp" type="checkbox">Voice JP
+            <label class="checkmarkContainer">
+                <input id="numeric" type="checkbox" class="visually-hidden">
+                <div class="checkmark">
+                    <div>0123</div>
+                </div>
+            </label>
+            <label class="checkmarkContainer">
+                <input id="hiragana" type="checkbox" class="visually-hidden" checked>
+                <div class="checkmark">
+                    <div>がな</div>
+                </div>
+            </label>
+            <label class="checkmarkContainer">
+                <input id="kanji" type="checkbox" class="visually-hidden" checked>
+                <div class="checkmark">
+                    <div>漢字</div>
+                </div>
+            </label>
+            <label class="checkmarkContainer">
+                <input id="voice_eng" type="checkbox" class="visually-hidden">
+                <div class="checkmark">
+                    <div>Voice ENG</div>
+                </div>
+            </label>
+            <label class="checkmarkContainer">
+                <input id="voice_jp" type="checkbox" class="visually-hidden">
+                <div class="checkmark">
+                    <div>Voice JP</div>
+                </div>
+            </label>
         </div>
         <div id="answers">
-            <input id="text"  type="checkbox">Text
-            <input id="voice"  type="checkbox">Voice
+            <label class="checkmarkContainer">
+                <input id="text" type="checkbox" class="visually-hidden" checked>
+                <div class="checkmark">
+                    <div>Text</div>
+                </div>
+            </label>
+            <label class="checkmarkContainer">
+                <input id="voice" type="checkbox" class="visually-hidden">
+                <div class="checkmark">
+                    <div>Voice</div>
+                </div>
+            </label>
         </div>
         <div id="misc">
             <input id="min" type="number" min=0 max=99998 value=0>
             <input id="max" type="number" min=1 max=99999 value=99999>
             <input id="difficulty" type="button" value="Difficulty">
-            <input id="spaced" type="checkbox">
+            <label class="checkmarkContainer">
+                <input id="spaced" type="checkbox" class="visually-hidden">
+                <div class="checkmark">
+                    <div>Spaced</div>
+                </div>
+            </label>
         </div>
     </header>
 
     <div id="main">
-        <div id="number">Allo ?</div>
+        <div id="number">...</div>
         <input id="answer" type="text" onkeypress="validateAnswer(event)" oninput="checkAnswer()" autofocus/>
     </div>
 

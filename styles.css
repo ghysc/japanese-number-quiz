@@ -1,5 +1,6 @@
 body {
     font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
+    font-weight: 400;
     background-color: beige;
     display: flex;
     flex-direction: column;
@@ -17,6 +18,10 @@ header {
     justify-content: center;
 }
 
+header > div {
+    margin: 0 50px;
+}
+
 #main {
     background-color: aquamarine;
     flex: 1;
@@ -29,11 +34,12 @@ header {
 }
 
 #number {
-    margin-bottom: 10px;
+    font-size:x-large;
+    margin-bottom: 20px;
 }
 
 #answer {
-    margin-bottom: 10px;
+    margin: 10px;
     box-sizing: content-box;
 }
 
@@ -52,11 +58,13 @@ footer {
 @keyframes valid {
     from { 
         border-color: green;
-        border-width: 8px;
+        border-left-width: 8px;
+        border-right-width: 8px;
     }
     to { 
         border-color: transparent;
-        border-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
     }
 }
 
@@ -69,10 +77,12 @@ footer {
 @keyframes wrong {
     from { 
         border-color: red;
-        border-width: 8px;
+        border-left-width: 8px;
+        border-right-width: 8px;
     }
     to { 
         border-color: transparent;
-        border-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
     }
 }
