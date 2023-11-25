@@ -1,3 +1,8 @@
+100000000,thousand million,おく,億
+10000,ten thousand,まん,万
+1000,thousand,せん,千
+100,hundred,ひゃく,百
+10,ten,じゅ,十
 0,zero,ゼロ,No kanji
 1,one,いち,一
 2,two,に,二
@@ -7,8 +12,4 @@
 6,six,ろく,六
 7,seven,なな,七
 8,eight,はち,八
-9,nine,きゅう,九
-10,ten,じゅう,十
-100,hundred,ひゃく,百
-1000,thousand,せん,千
-10000,ten thousand,まん,万
+9,nine,きゅ,九

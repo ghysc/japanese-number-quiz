@@ -14,24 +14,29 @@
 </head>
 
 <body>
-    <header oninput="updateOptions()">
-        <div id="questionTypes">
+    <header oninput="updateOptions(); refreshQuestion(false);">
+        <div id="questions">
             <input id="numeric" type="checkbox">0123
             <input id="hiragana" type="checkbox" checked>ひらがな
             <input id="kanji" type="checkbox" checked>漢字
+            <input id="voice_eng" type="checkbox">Voice ENG
+            <input id="voice_jp" type="checkbox">Voice JP
         </div>
-        <div id="answerTypes">
-            <input type="checkbox">Ne fait rien
+        <div id="answers">
+            <input id="text"  type="checkbox">Text
+            <input id="voice"  type="checkbox">Voice
         </div>
-        <div id="range">
-            <input id="min" type="number" value="0">
-            <input id="max" type="number" value="100000">
+        <div id="misc">
+            <input id="min" type="number" min=0 max=99998 value=0>
+            <input id="max" type="number" min=1 max=99999 value=99999>
+            <input id="difficulty" type="button" value="Difficulty">
+            <input id="spaced" type="checkbox">
         </div>
     </header>
 
     <div id="main">
-        <div id="number"></div>
-        <input id="answer" type="text" oninput="checkAnswer(this)" autofocus/>
+        <div id="number">Allo ?</div>
+        <input id="answer" type="text" onkeypress="validateAnswer(event)" oninput="checkAnswer()" autofocus/>
     </div>
 
     <footer>
