@@ -1,3 +1,5 @@
+@import "palette.css"; 
+
 .checkmarkContainer {
     user-select: none;
 }
@@ -8,13 +10,15 @@
     border-radius: 50%;
     display: inline-block;
 
-    background-color: #adadad;
-    border: 3px solid #525252;
+    background-color: var(--color-2);
+    border: 3px solid;
+    border-color: var(--color-4);
 }
 
 .checkmarkContainer input[type="checkbox"]:checked ~ .checkmark {
-    background-color: #525252;
-    border: 3px solid #adadad;
+    background-color: var(--color-3);
+    border: 3px solid;
+    border-color: var(--color-2);
 }
 
 .checkmark div {
@@ -26,7 +30,7 @@
 }
 
 .checkmarkContainer input[type="checkbox"]:checked ~ .checkmark div {
-    color: #dfdfdf;
+    color: white;
 }
 
 .visually-hidden {

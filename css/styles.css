@@ -1,7 +1,8 @@
+@import "palette.css"; 
+
 body {
     font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
     font-weight: 400;
-    background-color: beige;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -9,7 +10,7 @@ body {
 }
 
 header {
-    background-color: blue;
+    background-color: var(--color-1);
     padding: 10px;
     text-align: center;
     
@@ -23,7 +24,7 @@ header > div {
 }
 
 #main {
-    background-color: aquamarine;
+    background-color: var(--color-2);
     flex: 1;
     padding: 10px;
     
@@ -39,12 +40,14 @@ header > div {
 }
 
 #answer {
+    padding: 10px;
     margin: 10px;
     box-sizing: content-box;
+    font-size: x-large;
 }
 
 footer {
-    background-color: blue;
+    background-color: var(--color-1);
     padding: 10px;
     text-align: center;
 }
@@ -75,14 +78,25 @@ footer {
 }
 
 @keyframes wrong {
-    from { 
+    0% {
         border-color: red;
         border-left-width: 8px;
         border-right-width: 8px;
+        transform: translateX(10px);
     }
-    to { 
+    10% {
+        transform: translateX(-10px);
+    }
+    20% {
+        transform: translateX(8px);
+    }
+    30% {
+        transform: translateX(-8px);
+    }
+    100% {
         border-color: transparent;
         border-left-width: 0px;
         border-right-width: 0px;
+        transform: translateX(0);
     }
 }

@@ -2,6 +2,8 @@
 let answerElement;
 let numberElement;
 
+// les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
+
 document.addEventListener('DOMContentLoaded', function() {
     answerElement = document.getElementById('answer');
     numberElement = document.getElementById('number');
@@ -23,7 +25,7 @@ let exceptions = [];
 
 async function fetchCSVData() {
     // Use the fetch API to get the content of the file
-    await fetch('./numbers.csv')
+    await fetch('./csv/numbers.csv')
         .then(response => response.text())
         .then(csvData => {
             // Parse the CSV data using Papa Parse
@@ -36,7 +38,7 @@ async function fetchCSVData() {
         .catch(error => console.error('Error fetching file:', error));
 
     // Use the fetch API to get the content of the file
-    await fetch('./exceptions.csv')
+    await fetch('./csv/exceptions.csv')
         .then(response => response.text())
         .then(csvData => {
             // Parse the CSV data using Papa Parse
@@ -84,7 +86,10 @@ function refreshQuestion(refreshNumber, refreshType) {
     //which type of quetion
     switch(questions[questionID].id) {
         case "numeric":
-            numberElement.innerText = randomNumber;
+            let randomNumberSpaced = randomNumber.toString();
+            if (spaced != "")
+                randomNumberSpaced = randomNumberSpaced.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            numberElement.innerText = randomNumberSpaced;
         break;
         case "hiragana":
             numberElement.innerText = buildNumber(randomNumber, 2);
