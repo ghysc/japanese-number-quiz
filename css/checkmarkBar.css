@@ -1,17 +1,5 @@
 @import "palette.css";
 
-.checkmarkBox:first-child {
-    border-top-left-radius: 5rem;
-    border-bottom-left-radius: 5rem;
-    border-right-width: 1px;
-}
-
-.checkmarkBox:last-child {
-    border-top-right-radius: 5rem;
-    border-bottom-right-radius: 5rem;
-    border-left-width: 1px;
-}
-
 .checkmarkBox {
     float: left;
     position: relative;
@@ -19,11 +7,37 @@
     height: 80px;
     border: solid;
     border-width: 2px 1px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-.checkmarkBox input[type="checkbox"]:checked + div {
-    background-color: var(--color-3);
+.checkmarkBox:first-child {
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 5rem;
+    border-width: 2px 1px 2px 2px;
+}
+
+.checkmarkBox:last-child {
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    border-width: 2px 2px 2px 1px;
+}
+
+.checkmarkBox input:enabled:hover {
+    cursor: pointer;
+}
+
+.checkmarkBox input:enabled:hover + div {
+    background-color: var(--color-2);
+    mix-blend-mode:color;
+}
+
+.checkmarkBox input:disabled {
+    cursor: not-allowed;
+}
+
+.checkmarkBox input:disabled + div {
+    background-color: var(--color-2);
+    mix-blend-mode:multiply;
 }
 
 .visually-hidden {
@@ -37,6 +51,8 @@
 .checkmarkContentText {
     width: 100%;
     height: 100%;
+    color: aliceblue;
+    user-select: none;
 
     /* Flex layout to center text */
 	display: flex;
