@@ -10,69 +10,60 @@
 
     <link rel="stylesheet" href="css/palette.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/checkmark.css">
+    <link rel="stylesheet" href="css/checkmarkBar.css">
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 
 <body>
     <header oninput="updateOptions(); refreshQuestion(false, false);">
-        <div id="questions">
-            <label class="checkmarkContainer">
+        <div id="questions" class="checkmarkBar">
+            <div class="checkmarkBox">
                 <input id="numeric" type="checkbox" class="visually-hidden">
-                <div class="checkmark">
-                    <div>0123</div>
-                </div>
-            </label>
-            <label class="checkmarkContainer">
+                <div class="checkmarkContentText">0123</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="hiragana" type="checkbox" class="visually-hidden" checked>
-                <div class="checkmark">
-                    <div>がな</div>
-                </div>
-            </label>
-            <label class="checkmarkContainer">
+                <div class="checkmarkContentText">がな</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="kanji" type="checkbox" class="visually-hidden" checked>
-                <div class="checkmark">
-                    <div>漢字</div>
-                </div>
-            </label>
-            <label class="checkmarkContainer">
+                <div class="checkmarkContentText">漢字</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="voice_eng" type="checkbox" class="visually-hidden">
-                <div class="checkmark">
-                    <div>Voice ENG</div>
-                </div>
-            </label>
-            <label class="checkmarkContainer">
+                <div class="checkmarkContentText">Voice ENG</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="voice_jp" type="checkbox" class="visually-hidden">
-                <div class="checkmark">
-                    <div>Voice JP</div>
-                </div>
-            </label>
+                <div class="checkmarkContentText">Voice JP</div>
+            </div>
         </div>
-        <div id="answers">
-            <label class="checkmarkContainer">
+        <div id="answers" class="checkmarkBar">
+            <div class="checkmarkBox">
                 <input id="text" type="checkbox" class="visually-hidden" checked>
-                <div class="checkmark">
-                    <div>Text</div>
-                </div>
-            </label>
-            <label class="checkmarkContainer">
+                <div class="checkmarkContentText">Text</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="voice" type="checkbox" class="visually-hidden">
-                <div class="checkmark">
-                    <div>Voice</div>
-                </div>
-            </label>
+                <div class="checkmarkContentText">Voice</div>
+            </div>
         </div>
-        <div id="misc">
-            <input id="min" type="number" min=0 max=99998 value=0>
-            <input id="max" type="number" min=1 max=99999 value=99999>
-            <input id="difficulty" type="button" value="Difficulty">
-            <label class="checkmarkContainer">
+        <div id="misc" class="checkmarkBar">
+            <div class="checkmarkBox">
+                <input id="min" type="number" min=0 max=99998 value=0 class="visually-hidden">
+            </div>
+            <div class="checkmarkBox">
+                <input id="max" type="number" min=1 max=99999 value=9999 class="visually-hidden">
+            </div>
+            <div class="checkmarkBox">
+                <input id="difficulty" type="button" value="Difficulty" class="visually-hidden">
+                <div class="checkmarkContentText">Difficulty</div>
+            </div>
+            <div class="checkmarkBox">
                 <input id="spaced" type="checkbox" class="visually-hidden">
-                <div class="checkmark">
-                    <div>Spaced</div>
-                </div>
-            </label>
+                <div class="checkmarkContentText">Spaced</div>
+            </div>
         </div>
     </header>
 
