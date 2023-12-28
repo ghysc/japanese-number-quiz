@@ -1,12 +1,24 @@
 
-let answerElement;
+const ANIM_NAME_VALID = "valid";
+const ANIM_NAME_WRONG = "wrong";
+
+// logics
 let numberElement;
+let answerElement;
+// feebacks
+let firstHalf;
+let secondHalf;
+let plain;
 
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
 document.addEventListener('DOMContentLoaded', function() {
-    answerElement = document.getElementById('answer');
     numberElement = document.getElementById('number');
+    answerElement = document.getElementById('answer');
+
+    firstHalf = document.getElementById('firstHalf');
+    secondHalf = document.getElementById('secondHalf');
+    plain = document.getElementById('plain');
 
     clearInput();
     updateOptions();
@@ -174,18 +186,43 @@ function validateAnswer(event) {
     // Perform actions when "Enter" key is pressed
     if (event.keyCode === 13) {
         if (answerElement.value != randomNumber) {
-            answerElement.className = "wrong";
-            setTimeout(() => { answerElement.className = "" }, 1000);
+            plain.style.webkitAnimation = 'none';
+            plain.classList.add(ANIM_NAME_WRONG);
+            setTimeout(function() {
+                plain.style.webkitAnimation = '';
+            }, 10);
             
             clearInput();
+        } else {
+            firstHalf.style.webkitAnimation = 'none';
+            firstHalf.classList.add(ANIM_NAME_VALID);
+            setTimeout(function() {
+                firstHalf.style.webkitAnimation = '';
+            }, 10);
+            secondHalf.style.webkitAnimation = 'none';
+            secondHalf.classList.add(ANIM_NAME_VALID);
+            setTimeout(function() {
+                secondHalf.style.webkitAnimation = '';
+            }, 10);
+    
+            clearInput();
+            refreshQuestion(true, true);
         }
     }
 }
 
 function checkAnswer() {
     if (answerElement.value == randomNumber) {
-        answerElement.className = "valid";
-        setTimeout(() => { answerElement.className = "" }, 1000);
+        firstHalf.style.webkitAnimation = 'none';
+        firstHalf.classList.add(ANIM_NAME_VALID);
+        setTimeout(function() {
+            firstHalf.style.webkitAnimation = '';
+        }, 10);
+        secondHalf.style.webkitAnimation = 'none';
+        secondHalf.classList.add(ANIM_NAME_VALID);
+        setTimeout(function() {
+            secondHalf.style.webkitAnimation = '';
+        }, 10);
 
         clearInput();
         refreshQuestion(true, true);

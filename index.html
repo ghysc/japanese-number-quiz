@@ -69,7 +69,12 @@
 
     <div id="main">
         <div id="number">...</div>
-        <input id="answer" type="text" onkeypress="validateAnswer(event)" oninput="checkAnswer()" autofocus/>
+        <div id="answerFeedback">
+            <div id="firstHalf"><div class="extremity"></div></div>
+            <div id="secondHalf"><div class="extremity"></div></div>
+            <div id="plain"></div>
+            <input id="answer" type="text" onkeypress="validateAnswer(event)" autofocus/>
+        </div>
     </div>
 
     <footer>
