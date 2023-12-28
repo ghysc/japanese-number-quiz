@@ -1,6 +1,20 @@
 @import "palette.css";
 
 /* --------------- BAR -------------- */
+.checkmarkTitle {
+    padding: 5px 5px 0px 5px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    border: solid;
+    color: var(--color-4);
+
+    border-width: 2px 2px 0px 2px;
+    border-top-left-radius: 5rem;
+    border-top-right-radius: 5rem;
+    border-color: black;
+}
+
 .checkmarkBox {
     float: left;
     position: relative;
@@ -10,7 +24,7 @@
     border-width: 2px 1px;
 }
 
-.checkmarkBox:first-child {
+.checkmarkBox:nth-child(2) {
     border-top-left-radius: 5rem;
     border-bottom-left-radius: 5rem;
     border-width: 2px 1px 2px 2px;
@@ -64,4 +78,5 @@
 .checkmarkBox input[type=checkbox]:checked + .checkmarkLabel {
     background-color: var(--color-3);
     color: black;
+    box-shadow: 0px 8px 8px 1px var(--color-1) inset;
 }

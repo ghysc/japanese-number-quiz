@@ -3,22 +3,21 @@
 body {
     font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
     font-weight: 400;
+    margin: 0;
+    
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
 }
 
 header {
     background-color: var(--color-1);
     padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 
-header > div {
-    margin: 0 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2vw;
 }
 
 #main {
@@ -35,19 +34,15 @@ header > div {
 footer {
     background-color: var(--color-1);
     padding: 10px;
-    text-align: center;
-}
 
+    display: flex;
+    justify-content: center;
+}
 
 /* ------ QUESTION + ANSWER ------- */
 #number {
     margin-bottom: 20px;
     font-size: x-large;
-}
-
-#answerFeedback {
-    /* Position set to relative so the halves have an anchor */
-    position: relative;
 }
 
 #answer {
@@ -60,7 +55,12 @@ footer {
     font-size: x-large;
 }
 
-/* --------- FEEDBACK CORRECT ----------*/
+#feedbackContainer {
+    /* Position set to relative so the halves have an anchor */
+    position: relative;
+}
+
+/* --------- FEEDBACK VALID ----------*/
 
 .extremity {
     width: 0px;

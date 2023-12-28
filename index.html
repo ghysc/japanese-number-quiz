@@ -18,6 +18,9 @@
 <body>
     <header oninput="updateOptions(); refreshQuestion(false, false);">
         <div id="questions" class="checkmarkBar">
+            <div class="checkmarkTitle">
+                QUESTIONS
+            </div>
             <div class="checkmarkBox">
                 <input id="numeric" type="checkbox" class="visually-hidden">
                 <label for="numeric" class="checkmarkLabel">0123</label>
@@ -40,6 +43,9 @@
             </div>
         </div>
         <div id="answers" class="checkmarkBar">
+            <div class="checkmarkTitle">
+                ANSWERS
+            </div>
             <div class="checkmarkBox">
                 <input id="text" type="checkbox" class="visually-hidden" checked>
                 <label for="text" class="checkmarkLabel">Text</label>
@@ -50,6 +56,9 @@
             </div>
         </div>
         <div id="misc" class="checkmarkBar">
+            <div class="checkmarkTitle">
+                MISCELLANEOUS
+            </div>
             <div class="checkmarkBox">
                 <input id="min" type="number" min=0 max=99998 value=0 class="visually-hidden">
             </div>
@@ -69,11 +78,11 @@
 
     <div id="main">
         <div id="number">...</div>
-        <div id="answerFeedback">
+        <div id="feedbackContainer">
             <div id="firstHalf"><div class="extremity"></div></div>
             <div id="secondHalf"><div class="extremity"></div></div>
             <div id="plain"></div>
-            <input id="answer" type="text" onkeypress="validateAnswer(event)" autofocus/>
+            <input id="answer" type="text" onkeypress="validateAnswer(event)" oninput="checkAnswer()" autofocus/>
         </div>
     </div>
 
