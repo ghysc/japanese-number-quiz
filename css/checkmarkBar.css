@@ -1,18 +1,23 @@
 @import "palette.css";
 
 /* --------------- BAR -------------- */
+.checkmarkBar {
+    color: var(--color-4);
+    border-color: black;
+}
+
 .checkmarkTitle {
     padding: 5px 5px 0px 5px;
     width: 50%;
     margin: auto;
     text-align: center;
     border: solid;
-    color: var(--color-4);
+    background-color: var(--color-1);
+    border-color: inherit;
 
     border-width: 2px 2px 0px 2px;
     border-top-left-radius: 5rem;
     border-top-right-radius: 5rem;
-    border-color: black;
 }
 
 .checkmarkBox {
@@ -22,6 +27,7 @@
     height: 80px;
     border: solid;
     border-width: 2px 1px;
+    border-color: inherit;
 }
 
 .checkmarkBox:nth-child(2) {
@@ -36,7 +42,7 @@
     border-width: 2px 2px 2px 1px;
 }
 
-/* -------------- INPUT ------------- */
+/* -------------- UTILITY ------------- */
 .visually-hidden {
     position: absolute;
     opacity: 0%;
@@ -50,7 +56,6 @@
     float: left;
     width: 100%;
     height: 100%;
-    color: var(--color-4);
     user-select: none;
     border-radius: inherit;
     
@@ -60,14 +65,18 @@
     justify-content: center;
 }
 
-/* ------------ PSEUDO-CLASS ----------- */
+/* --------- PSEUDO-CLASS CHECKBOX -------- */
 .checkmarkBox input[type=checkbox]:disabled + .checkmarkLabel {
-    background-color: var(--color-2);
-    mix-blend-mode: multiply;
+    background-color: var(--color-0);
+    color: var(--color-1);
 }
 
 .checkmarkBox input[type=checkbox]:disabled + .checkmarkLabel:hover {
     cursor: not-allowed;
+}
+
+.checkmarkBox input[type=checkbox]:enabled:not(:checked) + .checkmarkLabel {
+    background-color: var(--color-1);
 }
 
 .checkmarkBox input[type=checkbox]:enabled + .checkmarkLabel:hover {
@@ -79,4 +88,19 @@
     background-color: var(--color-3);
     color: black;
     box-shadow: 0px 8px 8px 1px var(--color-1) inset;
+}
+
+/* --------- PSEUDO-CLASS BUTTON -------- */
+.checkmarkBox input[type=button] {
+    background-color: var(--color-1);
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: inherit;
+}
+
+.checkmarkBox input[type=button]:hover {
+    background-color: var(--color-3) !important;
+    cursor: pointer;
 }

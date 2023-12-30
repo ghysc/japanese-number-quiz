@@ -2,10 +2,25 @@
 const ANIM_NAME_VALID = "valid";
 const ANIM_NAME_WRONG = "wrong";
 
-// logics
+// HTML elements
+let questionsElement;
+let minElement;
+let maxElement;
+let difficultyLabelElement;
+let spacedLabelElement;
 let numberElement;
 let answerElement;
-// feebacks
+// logics - options
+let min;
+let max;
+let difficulty = 0;
+let spaced;
+// logics - inner
+let numbers = [];
+let exceptions = [];
+let randomNumber;
+let questionID = 0;
+// feedbacks
 let firstHalf;
 let secondHalf;
 let plain;
@@ -13,6 +28,10 @@ let plain;
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
 document.addEventListener('DOMContentLoaded', function() {
+    minElement = document.getElementById('min');
+    maxElement = document.getElementById('max');
+    difficultyLabelElement = document.getElementById('difficulty').nextElementSibling;
+    spacedLabelElement = document.getElementById('spaced').nextElementSibling;
     numberElement = document.getElementById('number');
     answerElement = document.getElementById('answer');
 
@@ -31,9 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function clearInput() {
     answerElement.value = '';
 }
-
-let numbers = [];
-let exceptions = [];
 
 async function fetchCSVData() {
     // Use the fetch API to get the content of the file
@@ -63,26 +79,44 @@ async function fetchCSVData() {
         .catch(error => console.error('Error fetching file:', error));
 }
 
-let questions;
-let min;
-let max;
-let spaced;
-
 function updateOptions() {
     // ---- QUESTIONS -----
-    questions = document.querySelectorAll('#questions input[type="checkbox"]');
-    questions = Array.from(questions).filter(function(checkbox) {
+    questionsElement = document.querySelectorAll('#questions input[type="checkbox"]');
+    questionsElement = Array.from(questionsElement).filter(function(checkbox) {
         return checkbox.checked;
       });
 
     // ------- MISC -------
-    min = parseInt(document.getElementById('min').value);
-    max = parseInt(document.getElementById('max').value);
+    min = parseInt(minElement.value);
+    max = parseInt(maxElement.value);
     spaced = document.getElementById('spaced').checked ? "\t" : "";
 }
 
-let randomNumber;
-let questionID = 0;
+function changeDifficulty(button) {
+    difficulty = (difficulty + 1) % 3;
+    switch (difficulty) {
+        case 0:
+            button.value = "No timer";
+            button.style.backgroundColor = "var(--color-1)";
+            break;
+        case 1:
+            button.value = "Easy timer";
+            button.style.backgroundColor = "limegreen";
+            break;
+        case 2:
+            button.value = "Hard timer";
+            button.style.backgroundColor = "crimson";
+            break;
+    }
+}
+
+function changeSpaced(checkbox) {
+    if(checkbox.checked) {
+        spacedLabelElement.value = "S p a c e d";
+    } else {
+        spacedLabelElement.value = "Spaced";
+    }
+}
 
 function refreshQuestion(refreshNumber, refreshType) {
     // number to guess
@@ -92,11 +126,11 @@ function refreshQuestion(refreshNumber, refreshType) {
     }
 
     if (refreshType) {
-        questionID = Math.floor(Math.random() * questions.length);
+        questionID = Math.floor(Math.random() * questionsElement.length);
     }
 
     //which type of quetion
-    switch(questions[questionID].id) {
+    switch(questionsElement[questionID].id) {
         case "numeric":
             let randomNumberSpaced = randomNumber.toString();
             if (spaced != "")

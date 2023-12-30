@@ -39,6 +39,12 @@ footer {
     justify-content: center;
 }
 
+.pattern {
+    background-image: url("../pattern.jpg");
+    background-blend-mode: multiply;
+    background-size: 100%;
+}
+
 /* ------ QUESTION + ANSWER ------- */
 #number {
     margin-bottom: 20px;
