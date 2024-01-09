@@ -1,6 +1,8 @@
 
 const ANIM_NAME_VALID = "valid";
 const ANIM_NAME_WRONG = "wrong";
+const TIMER_EASY = 6000;
+const TIMER_HARD = 2500;
 
 /// HTML ELEMENTS
 // -- questions
@@ -27,6 +29,8 @@ let numbers = [];
 let exceptions = [];
 let randomNumber;
 let questionType = "hiragana";
+let timerMilli = 0;
+let timerHandler;
 /// FEEDBACKS
 let firstHalf;
 let secondHalf;
@@ -141,6 +145,11 @@ function updateOptions() {
 }
 
 function changeDifficulty(element) {
+    // stop the current timer
+    clearInterval(timerHandler);
+    timerMilli = 0;
+
+    // change difficulty
     difficulty = (difficulty + 1) % 3;
     switch (difficulty) {
         case 0:
@@ -148,9 +157,11 @@ function changeDifficulty(element) {
             break;
         case 1:
             element.innerText = "Easy\nTimer";
+            timerHandler = setInterval(() => timer(TIMER_EASY), TIMER_EASY);
             break;
         case 2:
             element.innerText = "Hard\nTimer";
+            timerHandler = setInterval(() => timer(TIMER_HARD), TIMER_HARD);
             break;
     }
 }
@@ -165,6 +176,7 @@ function changeSpaced(element) {
     }
 }
 
+// ------- LOGICS ANSWER -------
 function refreshQuestion(refreshNumber, refreshType) {
     // number to guess
     if (refreshNumber) {
@@ -309,4 +321,9 @@ function checkAnswer() {
         clearInput();
         refreshQuestion(true, true);
     }
+}
+
+function timer(duration) {
+    refreshQuestion(true, true);
+    timerMilli = 0;
 }
