@@ -22,23 +22,23 @@
                 QUESTIONS
             </div>
             <div class="checkmarkBox">
-                <input id="numeric" type="checkbox" class="visually-hidden">
+                <input id="numeric" type="checkbox" class="visually-hidden" oninput="toggleQuestion(this);">
                 <label for="numeric" class="checkmarkLabel">0123</label>
             </div>
             <div class="checkmarkBox">
-                <input id="hiragana" type="checkbox" class="visually-hidden" checked>
-                <label for="hiragana" class="checkmarkLabel">がな</label>
+                <input id="hiragana" type="checkbox" class="visually-hidden" oninput="toggleQuestion(this);" checked>
+                <label for="hiragana" class="checkmarkLabel">かな</label>
             </div>
             <div class="checkmarkBox">
-                <input id="kanji" type="checkbox" class="visually-hidden" checked>
+                <input id="kanji" type="checkbox" class="visually-hidden" oninput="toggleQuestion(this);" checked>
                 <label for="kanji" class="checkmarkLabel">漢字</label>
             </div>
             <div class="checkmarkBox">
-                <input id="voice_eng" type="checkbox" class="visually-hidden" disabled>
+                <input id="voice_eng" type="checkbox" class="visually-hidden" oninput="toggleQuestion(this);" disabled>
                 <label for="voice_eng" class="checkmarkLabel">Voice ENG</label>
             </div>
             <div class="checkmarkBox">
-                <input id="voice_jp" type="checkbox" class="visually-hidden" disabled>
+                <input id="voice_jp" type="checkbox" class="visually-hidden" oninput="toggleQuestion(this);" disabled>
                 <label for="voice_jp" class="checkmarkLabel">Voice JP</label>
             </div>
         </div>
@@ -47,11 +47,11 @@
                 ANSWERS
             </div>
             <div class="checkmarkBox">
-                <input id="text" type="checkbox" class="visually-hidden" checked>
+                <input id="text" type="checkbox" class="visually-hidden" oninput="toggleAnswer(this);" checked>
                 <label for="text" class="checkmarkLabel">Text</label>
             </div>
             <div class="checkmarkBox">
-                <input id="voice" type="checkbox" class="visually-hidden" disabled>
+                <input id="voice" type="checkbox" class="visually-hidden" oninput="toggleAnswer(this);" disabled>
                 <label for="voice" class="checkmarkLabel">Voice</label>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 <input id="max" type="number" min=1 max=99999 value=9999 class="visually-hidden">
             </div>
             <div class="checkmarkBox">
-                <input id="difficulty" type="button" value="No timer" onclick="changeDifficulty(this)">
+                <a id="difficulty" onclick="changeDifficulty(this)">No<br>Timer</a>
             </div>
             <div class="checkmarkBox">
                 <input id="spaced" type="checkbox" onclick="changeSpaced(this)" class="visually-hidden">

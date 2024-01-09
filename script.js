@@ -2,25 +2,32 @@
 const ANIM_NAME_VALID = "valid";
 const ANIM_NAME_WRONG = "wrong";
 
-// HTML elements
+/// HTML ELEMENTS
+// -- questions
 let questionsElement;
+let questionsElementChecked;
+// -- answers
+let answersElement;
+let answersElementChecked;
+// -- misc
 let minElement;
 let maxElement;
-let difficultyLabelElement;
+let difficultyElement;
 let spacedLabelElement;
 let numberElement;
 let answerElement;
-// logics - options
+/// LOGICS
+// -- options
 let min;
 let max;
 let difficulty = 0;
-let spaced;
-// logics - inner
+let spaced = "";
+// -- inner
 let numbers = [];
 let exceptions = [];
 let randomNumber;
-let questionID = 0;
-// feedbacks
+let questionType = "hiragana";
+/// FEEDBACKS
 let firstHalf;
 let secondHalf;
 let plain;
@@ -28,9 +35,20 @@ let plain;
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
 document.addEventListener('DOMContentLoaded', function() {
+    // -- questions
+    questionsElement = document.querySelectorAll('#questions input[type="checkbox"]');
+    questionsElementChecked = Array.from(questionsElement).filter(function(checkbox) {
+        return checkbox.checked;
+    });
+    // -- answers
+    answersElement = document.querySelectorAll('#answers input[type="checkbox"]');
+    answersElementChecked = Array.from(answersElement).filter(function(checkbox) {
+        return checkbox.checked;
+    });
+    // -- misc
     minElement = document.getElementById('min');
     maxElement = document.getElementById('max');
-    difficultyLabelElement = document.getElementById('difficulty').nextElementSibling;
+    difficultyElement = document.getElementById('difficulty');
     spacedLabelElement = document.getElementById('spaced').nextElementSibling;
     numberElement = document.getElementById('number');
     answerElement = document.getElementById('answer');
@@ -79,42 +97,71 @@ async function fetchCSVData() {
         .catch(error => console.error('Error fetching file:', error));
 }
 
-function updateOptions() {
-    // ---- QUESTIONS -----
-    questionsElement = document.querySelectorAll('#questions input[type="checkbox"]');
-    questionsElement = Array.from(questionsElement).filter(function(checkbox) {
+// ------- OPTIONS QUESTION -------
+function toggleQuestion(element) {
+    // retrieve enabled questions' type
+    questionsElementChecked = Array.from(questionsElement).filter(function(checkbox) {
         return checkbox.checked;
-      });
+    });
 
-    // ------- MISC -------
-    min = parseInt(minElement.value);
-    max = parseInt(maxElement.value);
-    spaced = document.getElementById('spaced').checked ? "\t" : "";
+    // if there is no other option checked, re-enable it
+    if (questionsElementChecked.length == 0) {
+        element.checked = true;
+        // refresh array
+        questionsElementChecked = Array.from(questionsElement).filter(function(checkbox) {
+            return checkbox.checked;
+        });
+    }
+
+    // TODO: reroll only if the active question type was the toggled off one
+    refreshQuestion(false, true);
 }
 
-function changeDifficulty(button) {
+// ------- OPTIONS ANSWER -------
+function toggleAnswer(element) {
+    // retrieve enabled questions' type
+    answersElementChecked = Array.from(answersElement).filter(function(checkbox) {
+        return checkbox.checked;
+    });
+
+    // if there is no other option checked, re-enable it
+    if (answersElementChecked.length == 0) {
+        element.checked = true;
+        // refresh array
+        answersElementChecked = Array.from(answersElement).filter(function(checkbox) {
+            return checkbox.checked;
+        });
+    }
+}
+
+// ------- OPTIONS MISC -------
+function updateOptions() {
+    min = parseInt(minElement.value);
+    max = parseInt(maxElement.value);
+}
+
+function changeDifficulty(element) {
     difficulty = (difficulty + 1) % 3;
     switch (difficulty) {
         case 0:
-            button.value = "No timer";
-            button.style.backgroundColor = "var(--color-1)";
+            element.innerText = "No\nTimer";
             break;
         case 1:
-            button.value = "Easy timer";
-            button.style.backgroundColor = "limegreen";
+            element.innerText = "Easy\nTimer";
             break;
         case 2:
-            button.value = "Hard timer";
-            button.style.backgroundColor = "crimson";
+            element.innerText = "Hard\nTimer";
             break;
     }
 }
 
-function changeSpaced(checkbox) {
-    if(checkbox.checked) {
-        spacedLabelElement.value = "S p a c e d";
+function changeSpaced(element) {
+    if(element.checked) {
+        spacedLabelElement.textContent = "S p a c e d";
+        spaced = "\t";
     } else {
-        spacedLabelElement.value = "Spaced";
+        spacedLabelElement.textContent = "Spaced";
+        spaced = "";
     }
 }
 
@@ -126,11 +173,12 @@ function refreshQuestion(refreshNumber, refreshType) {
     }
 
     if (refreshType) {
-        questionID = Math.floor(Math.random() * questionsElement.length);
+        let random = Math.floor(Math.random() * questionsElementChecked.length);
+        questionType = questionsElementChecked[random].id
     }
 
     //which type of quetion
-    switch(questionsElement[questionID].id) {
+    switch(questionType) {
         case "numeric":
             let randomNumberSpaced = randomNumber.toString();
             if (spaced != "")
