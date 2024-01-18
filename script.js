@@ -189,6 +189,7 @@ function changeSpaced(element) {
         spacedLabelElement.textContent = "Spaced";
         spaced = "";
     }
+    refreshQuestion(false, false);
 
     answerElement.focus();
 }
