@@ -20,8 +20,8 @@ let numberElement;
 let answerElement;
 /// LOGICS
 // -- options
-let min;
-let max;
+let min = 0;
+let max = 9999;
 let difficulty = 0;
 let spaced = "";
 // -- inner
@@ -61,17 +61,12 @@ document.addEventListener('DOMContentLoaded', function() {
     secondHalf = document.getElementById('secondHalf');
     plain = document.getElementById('plain');
 
-    clearInput();
-    updateOptions();
+    clearAnswer();
     (async() => {
         await fetchCSVData();
         refreshQuestion(true, false);
     })();
 });
-
-function clearInput() {
-    answerElement.value = '';
-}
 
 async function fetchCSVData() {
     // Use the fetch API to get the content of the file
@@ -119,6 +114,8 @@ function toggleQuestion(element) {
 
     // TODO: reroll only if the active question type was the toggled off one
     refreshQuestion(false, true);
+
+    answerElement.focus();
 }
 
 // ------- OPTIONS ANSWER -------
@@ -136,12 +133,25 @@ function toggleAnswer(element) {
             return checkbox.checked;
         });
     }
+
+    answerElement.focus();
 }
 
 // ------- OPTIONS MISC -------
-function updateOptions() {
-    min = parseInt(minElement.value);
-    max = parseInt(maxElement.value);
+function changeMinMax(element) {
+    switch (element.id) {
+        case "min":
+            console.log("lin", element.value);
+            min = parseInt(element.value);
+            if (randomNumber < min)
+                refreshQuestion(true, true);
+            break;
+        case "max":
+            max = parseInt(element.value);
+            if (randomNumber > max)
+                refreshQuestion(true, true);
+            break;
+    }
 }
 
 function changeDifficulty(element) {
@@ -167,6 +177,8 @@ function changeDifficulty(element) {
             timerHandler = setInterval(() => timer(TIMER_HARD), TIMER_HARD);
             break;
     }
+
+    answerElement.focus();
 }
 
 function changeSpaced(element) {
@@ -177,6 +189,8 @@ function changeSpaced(element) {
         spacedLabelElement.textContent = "Spaced";
         spaced = "";
     }
+
+    answerElement.focus();
 }
 
 // ------- LOGICS ANSWER -------
@@ -279,6 +293,13 @@ function buildNumber(number, writingType) {
     }
 }
 
+function focusAnswerIfEnter(event) {
+    if (event.key === "Enter") {
+        answerElement.focus();
+        event.preventDefault();
+    }
+}
+
 function validateAnswer(event) {
     // Perform actions when "Enter" key is pressed
     if (event.keyCode === 13) {
@@ -289,7 +310,7 @@ function validateAnswer(event) {
                 plain.style.webkitAnimation = '';
             }, 10);
             
-            clearInput();
+            clearAnswer();
         } else {
             firstHalf.style.webkitAnimation = 'none';
             firstHalf.classList.add(ANIM_NAME_VALID);
@@ -302,7 +323,7 @@ function validateAnswer(event) {
                 secondHalf.style.webkitAnimation = '';
             }, 10);
     
-            clearInput();
+            clearAnswer();
             refreshQuestion(true, true);
         }
     }
@@ -321,12 +342,11 @@ function checkAnswer() {
             secondHalf.style.webkitAnimation = '';
         }, 10);
 
-        clearInput();
+        clearAnswer();
         refreshQuestion(true, true);
     }
 }
 
-function timer(duration) {
-    refreshQuestion(true, true);
-    timerMilli = 0;
+function clearAnswer() {
+    answerElement.value = '';
 }

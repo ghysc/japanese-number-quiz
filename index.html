@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <header class="pattern" oninput="updateOptions(); refreshQuestion(false, false);">
+    <header class="pattern">
         <div id="questions" class="checkmarkBar">
             <div class="checkmarkTitle">
                 QUESTIONS
@@ -60,10 +60,10 @@
                 MISCELLANEOUS
             </div>
             <div class="checkmarkBox">
-                <input id="min" type="number" min=0 max=99998 value=0 class="visually-hidden">
+                <input id="min" type="number" oninput="changeMinMax(this)" onkeydown="focusAnswerIfEnter(event)" min=0 max=99998 value=0>
             </div>
             <div class="checkmarkBox">
-                <input id="max" type="number" min=1 max=99999 value=9999 class="visually-hidden">
+                <input id="max" type="number" oninput="changeMinMax(this)" onkeydown="focusAnswerIfEnter(event)" min=1 max=99999 value=9999>
             </div>
             <div class="checkmarkBox">
                 <a id="difficulty" onclick="changeDifficulty(this)">No<br>Timer</a>
