@@ -154,13 +154,16 @@ function changeDifficulty(element) {
     switch (difficulty) {
         case 0:
             element.innerText = "No\nTimer";
+            element.style.backgroundColor = "var(--color-1)";
             break;
         case 1:
             element.innerText = "Easy\nTimer";
+            element.style.backgroundColor = "limegreen";
             timerHandler = setInterval(() => timer(TIMER_EASY), TIMER_EASY);
             break;
         case 2:
             element.innerText = "Hard\nTimer";
+            element.style.backgroundColor = "crimson";
             timerHandler = setInterval(() => timer(TIMER_HARD), TIMER_HARD);
             break;
     }

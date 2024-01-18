@@ -4,6 +4,7 @@ body {
     font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
     font-weight: 400;
     margin: 0;
+    background-color: var(--color-2);
     
     display: flex;
     flex-direction: column;
@@ -21,14 +22,15 @@ header {
 }
 
 #main {
-    background-color: var(--color-2);
     flex: 1;
-    padding: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: end;
     
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    gap: 5vw;
 }
 
 footer {
@@ -47,7 +49,6 @@ footer {
 
 /* ------ QUESTION + ANSWER ------- */
 #number {
-    margin-bottom: 20px;
     font-size: x-large;
 }
 
@@ -55,9 +56,16 @@ footer {
     /* Position set to relative only to be able to benefit from z-index */
     position: relative;
     z-index: 1;
+    /* Have a 100% width to have #answer fill #feedbackContainer,
+    then left -11px (padding + 1px because of native input thing) to center,
+    even if the whole thing now slightly overflows*/
+    width: 100%;
+    left: -11px;
     padding: 10px;
+    opacity: 20%;
+
+    text-align: inherit;
     outline: none;
-    margin: 8px;
     font-size: x-large;
 }
 

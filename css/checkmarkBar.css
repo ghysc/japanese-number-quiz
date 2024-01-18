@@ -66,14 +66,14 @@
 }
 
 /* --------- PSEUDO-CLASS CHECKBOX -------- */
+.checkmarkBox input[type=checkbox]:enabled:not(:checked) + .checkmarkLabel {
+    background-color: var(--color-1);
+}
+
 .checkmarkBox input[type=checkbox]:disabled + .checkmarkLabel {
     background-color: var(--color-0);
     color: var(--color-1);
     cursor: not-allowed;
-}
-
-.checkmarkBox input[type=checkbox]:enabled:not(:checked) + .checkmarkLabel {
-    background-color: var(--color-1);
 }
 
 .checkmarkBox input[type=checkbox]:enabled + .checkmarkLabel:hover {
@@ -88,12 +88,6 @@
 }
 
 /* --------- PSEUDO-CLASS BUTTON -------- */
-.checkmarkBox a:disabled {
-    background-color: var(--color-0);
-    color: var(--color-1);
-    cursor: not-allowed;
-}
-
 .checkmarkBox a {
     background-color: var(--color-1);
     height: 100%;
@@ -104,6 +98,12 @@
 	align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.checkmarkBox a:disabled {
+    background-color: var(--color-0);
+    color: var(--color-1);
+    cursor: not-allowed;
 }
 
 .checkmarkBox a:hover {
