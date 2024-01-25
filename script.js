@@ -5,10 +5,10 @@ const TIMER_EASY = 6000;
 const TIMER_HARD = 2500;
 
 /// HTML ELEMENTS
-// -- questions
+// -- questions' options
 let questionsElement;
 let questionsElementChecked;
-// -- answers
+// -- answers' options
 let answersElement;
 let answersElementChecked;
 // -- misc
@@ -16,6 +16,7 @@ let minElement;
 let maxElement;
 let difficultyElement;
 let spacedLabelElement;
+// -- main
 let numberElement;
 let answerElement;
 /// LOGICS
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     maxElement = document.getElementById('max');
     difficultyElement = document.getElementById('difficulty');
     spacedLabelElement = document.getElementById('spaced').nextElementSibling;
+    // -- main
     numberElement = document.getElementById('number');
     answerElement = document.getElementById('answer');
 
@@ -305,28 +307,18 @@ function validateAnswer(event) {
     // Perform actions when "Enter" key is pressed
     if (event.keyCode === 13) {
         if (answerElement.value != randomNumber) {
-            plain.style.webkitAnimation = 'none';
-            plain.classList.add(ANIM_NAME_WRONG);
-            setTimeout(function() {
-                plain.style.webkitAnimation = '';
-            }, 10);
-            
-            clearAnswer();
+            answerElement.setCustomValidity("Try again");
         } else {
-            firstHalf.style.webkitAnimation = 'none';
-            firstHalf.classList.add(ANIM_NAME_VALID);
-            setTimeout(function() {
-                firstHalf.style.webkitAnimation = '';
-            }, 10);
-            secondHalf.style.webkitAnimation = 'none';
-            secondHalf.classList.add(ANIM_NAME_VALID);
-            setTimeout(function() {
-                secondHalf.style.webkitAnimation = '';
-            }, 10);
-    
-            clearAnswer();
+            answerElement.setCustomValidity("");
             refreshQuestion(true, true);
         }
+
+        answerElement.style.webkitAnimation = 'none';
+        setTimeout(function() {
+            answerElement.style.webkitAnimation = '';
+        }, 10);
+        clearAnswer();
+        answerElement.reportValidity();
     }
 }
 
