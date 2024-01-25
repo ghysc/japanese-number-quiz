@@ -319,6 +319,9 @@ function validateAnswer(event) {
         }, 10);
         clearAnswer();
         answerElement.reportValidity();
+        // workaround to get rid of the native message of invalidity
+        answerElement.blur();
+        answerElement.focus();
     }
 }
 

@@ -1,10 +1,7 @@
 @import './palette.css';
 
 #answer {
-    /* Position set to relative only to be able to benefit from z-index */
-    position: relative;
-    z-index: 1;
-    /* Have a 100% width to have #answer fill #feedbackContainer,
+    /* Have a 100% width to have #answer fill flexbox container,
     then left -11px (padding + 1px because of native input thing) to center,
     even if the whole thing now slightly overflows*/
     width: 100%;
@@ -20,7 +17,7 @@
 #answer:invalid {
     animation-name: wrong;
     animation-duration: .4s;
-    animation-timing-function:linear;
+    animation-timing-function: linear;
 }
 
 @keyframes wrong {
