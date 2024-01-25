@@ -11,43 +11,28 @@ body {
     min-height: 100vh;
 }
 
-header {
+main {
+    flex: 1;
+    width: 50%;
+    margin: auto;
+    text-align: end;
+    font-size: x-large;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2vw;
+}
+
+header, footer {
     background-color: var(--color-1);
     padding: 10px;
+    background-image: url("../pattern.jpg");
+    background-blend-mode: multiply;
+    background-size: 100%;
 
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 2vw;
-}
-
-#main {
-    flex: 1;
-    width: 50%;
-    margin: auto;
-    text-align: end;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5vw;
-}
-
-footer {
-    background-color: var(--color-1);
-    padding: 10px;
-
-    display: flex;
-    justify-content: center;
-}
-
-.pattern {
-    background-image: url("../pattern.jpg");
-    background-blend-mode: multiply;
-    background-size: 100%;
-}
-
-/* ------ QUESTION ------- */
-#number {
-    font-size: x-large;
 }

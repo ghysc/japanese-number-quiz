@@ -32,10 +32,6 @@ let randomNumber;
 let questionType = "hiragana";
 let timerMilli = 0;
 let timerHandler;
-/// FEEDBACKS
-let firstHalf;
-let secondHalf;
-let plain;
 
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
@@ -58,10 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // -- main
     numberElement = document.getElementById('number');
     answerElement = document.getElementById('answer');
-
-    firstHalf = document.getElementById('firstHalf');
-    secondHalf = document.getElementById('secondHalf');
-    plain = document.getElementById('plain');
 
     clearAnswer();
     (async() => {
@@ -325,24 +317,12 @@ function validateAnswer(event) {
     }
 }
 
-function checkAnswer() {
-    if (answerElement.value == randomNumber) {
-        firstHalf.style.webkitAnimation = 'none';
-        firstHalf.classList.add(ANIM_NAME_VALID);
-        setTimeout(function() {
-            firstHalf.style.webkitAnimation = '';
-        }, 10);
-        secondHalf.style.webkitAnimation = 'none';
-        secondHalf.classList.add(ANIM_NAME_VALID);
-        setTimeout(function() {
-            secondHalf.style.webkitAnimation = '';
-        }, 10);
-
-        clearAnswer();
-        refreshQuestion(true, true);
-    }
-}
-
 function clearAnswer() {
     answerElement.value = '';
+}
+
+function timer(duration) {
+    console.log();
+    refreshQuestion(true, true);
+    timerMilli = 0;
 }
