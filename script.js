@@ -18,6 +18,7 @@ let difficultyElement;
 let spacedLabelElement;
 // -- main
 let numberElement;
+let timerElement;
 let answerElement;
 /// LOGICS
 // -- options
@@ -30,8 +31,10 @@ let numbers = [];
 let exceptions = [];
 let randomNumber;
 let questionType = "hiragana";
-let timerMilli = 0;
+let timeStart;
+let timerDuration;
 let timerHandler;
+let timerUILoop;
 
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
@@ -53,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     spacedLabelElement = document.getElementById('spaced').nextElementSibling;
     // -- main
     numberElement = document.getElementById('number');
+    timerElement = document.getElementById('timer');
     answerElement = document.getElementById('answer');
 
     clearAnswer();
@@ -149,10 +153,7 @@ function changeMinMax(element) {
 }
 
 function changeDifficulty(element) {
-    // stop the current timer
-    clearInterval(timerHandler);
-    timerMilli = 0;
-
+    stopTimer(); 
     // change difficulty
     difficulty = (difficulty + 1) % 3;
     switch (difficulty) {
@@ -163,12 +164,14 @@ function changeDifficulty(element) {
         case 1:
             element.innerText = "Easy\nTimer";
             element.style.backgroundColor = "limegreen";
-            timerHandler = setInterval(() => timer(TIMER_EASY), TIMER_EASY);
+            timerDuration = TIMER_EASY;
+            startTimer();
             break;
         case 2:
             element.innerText = "Hard\nTimer";
             element.style.backgroundColor = "crimson";
-            timerHandler = setInterval(() => timer(TIMER_HARD), TIMER_HARD);
+            timerDuration = TIMER_HARD;
+            startTimer();
             break;
     }
 
@@ -299,10 +302,12 @@ function validateAnswer(event) {
     // Perform actions when "Enter" key is pressed
     if (event.keyCode === 13) {
         if (answerElement.value != randomNumber) {
-            answerElement.setCustomValidity("Try again");
+            answerElement.setCustomValidity("Type answer here");
         } else {
-            answerElement.setCustomValidity("");
             refreshQuestion(true, true);
+            answerElement.setCustomValidity("");
+            stopTimer();
+            startTimer();
         }
 
         answerElement.style.webkitAnimation = 'none';
@@ -321,8 +326,26 @@ function clearAnswer() {
     answerElement.value = '';
 }
 
-function timer(duration) {
-    console.log();
-    refreshQuestion(true, true);
-    timerMilli = 0;
+function startTimer() {
+    timerHandler = setInterval(() => {
+        refreshQuestion(true, true);
+        clearAnswer();
+        stopTimer();
+        startTimer();
+    }, timerDuration);
+
+    timeStart = document.timeline.currentTime;
+    requestAnimationFrame(() => animateTimer(timeStart));
+}
+
+function stopTimer() {
+    clearInterval(timerHandler);
+    requestAnimationFrame(() => timerElement.value = 100);
+    cancelAnimationFrame(timerUILoop);
+}
+
+function animateTimer(timeStamp) {
+    const value = 1 - (timeStamp - timeStart) / timerDuration; 
+    timerElement.value = value * 100;
+    timerUILoop = requestAnimationFrame((t) => animateTimer(t));
 }

@@ -15,7 +15,7 @@ main {
     flex: 1;
     width: 50%;
     margin: auto;
-    text-align: end;
+    text-align: center;
     font-size: x-large;
     
     display: flex;
@@ -35,4 +35,8 @@ header, footer {
     justify-content: center;
     flex-wrap: wrap;
     gap: 2vw;
+}
+
+#timerImg {
+    background-color: red;
 }
