@@ -35,6 +35,7 @@ let timeStart;
 let timerDuration;
 let timerHandler;
 let timerUILoop;
+let timerUIEvenOdd = 0;
 
 // les kanjis sont utilisés dans des livres dont l'écriture est verticale (à partir de 100, car en dessous ça peut tenir en une 'case')
 
@@ -326,6 +327,7 @@ function clearAnswer() {
     answerElement.value = '';
 }
 
+// ------ LOGICS & UI TIMER -------- 
 function startTimer() {
     timerHandler = setInterval(() => {
         refreshQuestion(true, true);
@@ -336,16 +338,20 @@ function startTimer() {
 
     timeStart = document.timeline.currentTime;
     requestAnimationFrame(() => animateTimer(timeStart));
+    timerUIEvenOdd = (timerUIEvenOdd + 1) % 2;
 }
 
 function stopTimer() {
     clearInterval(timerHandler);
-    requestAnimationFrame(() => timerElement.value = 100);
+    requestAnimationFrame(() => timerElement.style.background = "conic-gradient(var(--color-3) 0%, 0, var(--color-2))");
     cancelAnimationFrame(timerUILoop);
 }
 
 function animateTimer(timeStamp) {
-    const value = 1 - (timeStamp - timeStart) / timerDuration; 
-    timerElement.value = value * 100;
+    const value = 1 - (timeStamp - timeStart) / timerDuration;
+    // if (timerUIEvenOdd == 0)
+    //     timerElement.style.background = "conic-gradient(var(--color-3) " + (value * 100) + "%, 0, var(--color-2))";
+    // else
+        timerElement.style.background = "conic-gradient(var(--color-2) " + (value * 100) + "%, 0, var(--color-3))";
     timerUILoop = requestAnimationFrame((t) => animateTimer(t));
 }

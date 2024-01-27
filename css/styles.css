@@ -37,6 +37,17 @@ header, footer {
     gap: 2vw;
 }
 
-#timerImg {
-    background-color: red;
+#number {
+    z-index: 1;
+}
+
+#timer {
+    position: absolute;
+    z-index: 0;
+    width: 50vmin;
+    height: 50vmin; 
+    align-self: center;
+
+    border-radius: 50%;
+    background: conic-gradient(var(--color-3) 0%, 0, var(--color-2));
 }
