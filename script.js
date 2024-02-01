@@ -1,8 +1,6 @@
 
-const ANIM_NAME_VALID = "valid";
-const ANIM_NAME_WRONG = "wrong";
 const TIMER_EASY = 6000;
-const TIMER_HARD = 2500;
+const TIMER_HARD = 3500;
 
 /// HTML ELEMENTS
 // -- questions' options
@@ -343,7 +341,10 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(timerHandler);
-    requestAnimationFrame(() => timerElement.style.background = "conic-gradient(var(--color-3) 0%, 0, var(--color-2))");
+    requestAnimationFrame(() => 
+    {
+        timerElement.style.background = "conic-gradient(var(--color-3) 0%, 0, var(--color-2))";
+    });
     cancelAnimationFrame(timerUILoop);
 }
 
